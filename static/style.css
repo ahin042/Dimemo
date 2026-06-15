@@ -1,0 +1,210 @@
+@font-face {
+    font-family: 'KyoboHandwriting2019';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: 'KyoboHandwriting2019';
+    font-size: large;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('/static/image/bg.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    
+    /* 화면 전체 높이를 사용해 세로 정렬을 맞추는 핵심 설정입니다 */
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto; /* 위아래 여백을 적절히 주어 스크롤 시 여유를 둡니다 */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.9); /* 배경이 살짝 비치는 고급스러운 투명도 */
+    backdrop-filter: blur(8px); /* 뒤에 배경을 은은하게 흐리게 만듭니다 */
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 { 
+    margin: 0; 
+    font-size: 22px; 
+    color: #2d3748; 
+    font-weight: 700;
+}
+
+.user-form {
+    display: flex;
+    gap: 8px;
+}
+
+.user-form input[type="text"] {
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: border 0.2s;
+}
+
+.user-form input[type="text"]:focus {
+    border-color: #34365b;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 20px 2px #929292;
+}
+
+h2 { 
+    margin-top: 0;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #edf2f7; 
+    padding-bottom: 12px; 
+    color: #34365b; 
+    font-size: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+input[type="date"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+input[type="date"]:focus, textarea:focus {
+    border-color: #34365b;
+}
+
+textarea { resize: vertical; }
+
+button {
+    background-color: #34365b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover { 
+    background-color: #242644; 
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.item-list {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* 스크롤바 디자인 예쁘게 다듬기 */
+.item-list::-webkit-scrollbar {
+    width: 6px;
+}
+.item-list::-webkit-scrollbar-thumb {
+    background-color: #cbd5e0;
+    border-radius: 4px;
+}
+
+.item {
+    background: #f8fafc;
+    border: 1px solid #edf2f7;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.item .date {
+    font-weight: bold;
+    color: #4a5568;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.item .content {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4a5568;
+    white-space: pre-wrap;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    color: #e53e3e;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    text-decoration: underline;
+
+}
+ul {
+    padding-left: 20px;
+    margin: 5px 0;
+}
+
+li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-right: 40px;
+    color: #4a5568;
+    font-size: 14px;
+}

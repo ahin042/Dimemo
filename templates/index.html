@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>디메모</title>
+    <link rel="icon" href="../static/image/logo.png">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>{{ name }}님 오늘은 무엇을 하실건가요?</h1>
+        <form class="user-form" action="/change_user" method="POST" style="flex-direction: row; margin: 0;">
+            <input type="text" name="name" placeholder="이름 입력" required>
+            <button type="submit" style="padding: 8px 12px;">사용자 변경하기</button>
+        </form>
+    </header>
+
+    <div class="main-content">
+        <div class="card">
+            <h2>Diary</h2>
+            <form action="/diary/add" method="POST">
+                <input type="date" name="date" required>
+                <textarea name="text" rows="4" placeholder="오늘의 일기를 입력하세요... (같은 날짜에 쓰면 내용이 수정됩니다)" required></textarea>
+                <button type="submit">일기 저장 / 수정</button>
+            </form>
+            
+            <div class="item-list">
+                {% if diaries %}
+                    {% for date, text in diaries.items() %}
+                        <div class="item">
+                            <div class="date">{{ date }}</div>
+                            <div class="content">{{ text }}</div>
+                            <a href="/diary/delete/{{ date }}" class="delete-btn" onclick="return confirm('이 일기를 삭제하시겠습니까?');">삭제</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: #a0aec0;">저장된 일기가 없습니다.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Memo</h2>
+            <form action="/memo/add" method="POST">
+                <input type="date" name="date" required>
+                <textarea name="text" rows="3" placeholder="기억해야 할 메모를 입력하세요..." required></textarea>
+                <button type="submit">메모 추가</button>
+            </form>
+
+            <div class="item-list">
+                {% if memos %}
+                    {% for date, memo_list in memos.items() %}
+                        <div class="item">
+                            <div class="date">{{ date }}</div>
+                            <ul>
+                                {% for memo in memo_list %}
+                                    <li>
+                                        {{ memo }}
+                                        <a href="/memo/delete/{{ date }}/{{ loop.index0 }}" class="delete-btn" style="position: inline; margin-left: 10px;" onclick="return confirm('이 메모를 삭제하시겠습니까?');">❌</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: #a0aec0;">저장된 메모가 없습니다.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Diary(일기) 폼의 날짜 선택 창에만 '오늘 이후 미래 날짜 선택 방지' 적용
+    const diaryDateInput = document.querySelector('.card:first-child input[type="date"]');
+    if (diaryDateInput) {
+        diaryDateInput.max = new Date().toISOString().split("T")[0];
+    }
+    
+    // Memo(메모) 폼의 날짜는 max 제한을 두지 않아 미래 날짜 입력이 가능합니다.
+</script>
+</body>
+</html>
